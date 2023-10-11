@@ -1,8 +1,9 @@
 import './App.css';
-import { Layout, Input, Menu, Badge, Avatar, Dropdown, Space, Button, Table, Tag, List } from 'antd';
+import { Layout, Input, Menu, Badge, Avatar, Dropdown, Space, Button, Table, Tag, Tabs, Flex, Radio } from 'antd';
 import React, { useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined, BellOutlined, DownOutlined, SmileOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, MailOutlined, SettingOutlined, BellOutlined, DownOutlined, MoreOutlined, EditOutlined } from '@ant-design/icons';
 const { Search } = Input;
+
 function getItem(label, key, icon, children, type) {
     return {
         key,
@@ -13,7 +14,9 @@ function getItem(label, key, icon, children, type) {
     };
 }
 
-const items = [
+
+
+const itemsA = [
     getItem('Home', 'sub1', <MailOutlined />,),
     getItem('Contracts', 'sub2', <AppstoreOutlined />,),
     getItem('Invoices', 'sub4', <SettingOutlined />,),
@@ -38,10 +41,10 @@ const headerStyle = {
     backgroundColor: 'white',
 };
 const contentStyle = {
-    textAlign: 'center',
+
     minHeight: 120,
-    color: '#fff',
-    backgroundColor: '#108ee9',
+    padding: 40
+
 };
 const siderStyle = {
 
@@ -56,7 +59,7 @@ const footerStyle = {
     backgroundColor: '#7dbcea',
 };
 
-const itemsA = [
+const items = [
     {
         key: '1',
         label: (
@@ -92,12 +95,12 @@ const columns = [
         title: 'Client',
         key: 'client',
         render: (_, record) => (
-            <Space style={{ display: 'flex' }} size="middle" >
+            <Space >
                 <Avatar shape="round" size="large"></Avatar>
-                <Space direction="vertical" style={{ display: 'flex' }}>
-                    <p> {record.name}</p>
-                    <p>{record.date}</p>
-                </Space>
+                <Flex justify="center" vertical align="start">
+                    <span> {record.name}</span>
+                    <span>{record.date}</span>
+                </Flex>
             </Space>
 
 
@@ -126,10 +129,9 @@ const columns = [
         title: 'Action',
         key: 'action',
         render: (_, record) => (
-            <Space size="middle">
-                <a>Invite {record.name}</a>
-                <a>Delete</a>
-            </Space>
+
+            <MoreOutlined />
+
         ),
     },
 
@@ -164,7 +166,14 @@ const data = [
         date: 'October 11, 2023',
     },
 ];
+
+
+
 function App() {
+    const [tabPosition, setTabPosition] = useState('left');
+    const changeTabPosition = (e) => {
+        setTabPosition(e.target.value);
+    };
     const [openKeys, setOpenKeys] = useState(['sub1']);
     const onOpenChange = (keys) => {
         const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
@@ -176,6 +185,7 @@ function App() {
     };
     return (
         <div className="App">
+
             <Layout>
                 <Sider style={siderStyle} width='300'>
                     <h1 style={{ paddingLeft: 30 }}>Sahel</h1>
@@ -184,8 +194,20 @@ function App() {
                         openKeys={openKeys}
                         onOpenChange={onOpenChange}
                         style={{ width: 256, background: 'transparent', color: 'white', }}
-                        items={items}
+                        items={itemsA}
                     />
+                    <Dropdown
+                        menu={{
+                            items,
+                        }}
+                    >
+                        <a onClick={(e) => e.preventDefault()}>
+                            <Space>
+                                Hover me
+                                <DownOutlined />
+                            </Space>
+                        </a>
+                    </Dropdown>
                 </Sider>
                 <Layout>
                     <Header style={headerStyle}>
@@ -207,62 +229,65 @@ function App() {
                         </Badge>
                         <Avatar shape="round" size="large"></Avatar>
 
-
-                        <Dropdown
-                            menu={{
-                                itemsA,
-                            }}
-                        >
-                            <a onClick={(e) => e.preventDefault()}>
-                                <Space>
-                                    Hover me
-                                    <DownOutlined />
-                                </Space>
-                            </a>
-                        </Dropdown>
+                        <Space>
+                            <Dropdown
+                                menu={{
+                                    items,
+                                }}
+                            >
+                                <a onClick={(e) => e.preventDefault()}>
+                                    <Space>
+                                        Hover me
+                                        <DownOutlined />
+                                    </Space>
+                                </a>
+                            </Dropdown></Space>
 
 
 
 
 
                     </Header>
-                    <Content style={contentStyle}>
-                        <h1>Invoices</h1>
-                        <h3>Edit</h3>
-                        <ul>
-                            <li>Internal invoices</li>
-                            <li>External invoices</li>
-                        </ul>
-                        <Search
-                            placeholder="Search for contact name"
-                            onSearch={onSearch}
-                            style={{
-                                width: 200,
-                            }}
-                        />
+                    <Content style={contentStyle} >
 
-                        <p>Invoice Date</p>
-                        <p>Status</p>
+
+                        <Flex justify='space-between' align='flex-start'>
+                            <h1>Invoices</h1>
+                            <Space> <EditOutlined /><p>Edit</p></Space>
+                        </Flex>
+
 
                         <div>
-                            <h3>Invoices</h3>
-                            <p>Filter</p>
-                        </div>
-                        <div>  <BellOutlined style={({ color: 'black', })} /></div>
-                        <p>This one </p>
+                            <Space
+                                style={{
+                                    marginBottom: 24,
+                                }}
+                            >
 
-                        <Dropdown
-                            menu={{
-                                itemsA,
-                            }}
-                        >
-                            <a onClick={(e) => e.preventDefault()}>
-                                <Space>
-                                    <Button>topRight</Button>
-                                </Space>
-                            </a>
-                        </Dropdown>
-                        <Table columns={columns} dataSource={data} />;
+                                <Radio.Group value={tabPosition} onChange={changeTabPosition}>
+                                    <Radio.Button value="left">Internal invoices</Radio.Button>
+                                    <Radio.Button value="right">External invoices</Radio.Button>
+                                </Radio.Group>
+                            </Space>
+                        </div>
+                        <Flex justify='space-between' align='flex-start'>
+                            <Search
+                                placeholder="Search for contact name"
+                                onSearch={onSearch}
+                                style={{
+                                    width: 200,
+                                }}
+                            />
+
+                            <Space>
+                                <p>Invoice Date</p>
+                                <p>Status</p>
+                            </Space>
+                        </Flex>
+
+
+                        <Table columns={columns} dataSource={data}
+                            title={() => 'Invoices'} />
                     </Content>
                     <Footer style={footerStyle}>Footer</Footer>
                 </Layout>
