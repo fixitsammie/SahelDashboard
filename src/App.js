@@ -1,7 +1,7 @@
 import './App.css';
 import { Layout, Input, Menu, Badge, Avatar, Dropdown, Space, Button, Table, Tag, Tabs, Flex, Radio } from 'antd';
 import React, { useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined, BellOutlined, DownOutlined, MoreOutlined, EditOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, MailOutlined, SettingOutlined, BellOutlined, DownOutlined, MoreOutlined, EditOutlined, HomeOutlined, UserAddOutlined, SwapOutlined, ProjectOutlined, TagsOutlined, PayCircleOutlined, TableOutlined, TrophyOutlined, FileProtectOutlined, FileTextOutlined } from '@ant-design/icons';
 const { Search } = Input;
 
 function getItem(label, key, icon, children, type) {
@@ -17,15 +17,15 @@ function getItem(label, key, icon, children, type) {
 
 
 const itemsA = [
-    getItem('Home', 'sub1', <MailOutlined />,),
-    getItem('Contracts', 'sub2', <AppstoreOutlined />,),
-    getItem('Invoices', 'sub4', <SettingOutlined />,),
-    getItem('Transaction', 'sub4', <SettingOutlined />,),
-    getItem('Sahel Advance', 'sub4', <SettingOutlined />,),
-    getItem('Withdrawal Methods', 'sub4', <SettingOutlined />,),
-    getItem('Perks', 'sub4', <SettingOutlined />,),
-    getItem('Accounting', 'sub4', <SettingOutlined />,),
-    getItem('Tax Forms', 'sub4', <SettingOutlined />,),
+    getItem('Home', 'sub1', <HomeOutlined />,),
+    getItem('Contracts', 'sub2', <ProjectOutlined />,),
+    getItem('Invoices', 'sub3', <FileTextOutlined />),
+    getItem('Transaction', 'sub4', <SwapOutlined />,),
+    getItem('Sahel Advance', 'sub5', <TagsOutlined />,),
+    getItem('Withdrawal Methods', 'sub6', <PayCircleOutlined />,),
+    getItem('Perks', 'sub7', <TrophyOutlined />,),
+    getItem('Accounting', 'sub8', <TableOutlined />,),
+    getItem('Tax Forms', 'sub9', <FileProtectOutlined />,),
 ];
 
 // submenu keys of first level
@@ -196,18 +196,7 @@ function App() {
                         style={{ width: 256, background: 'transparent', color: 'white', }}
                         items={itemsA}
                     />
-                    <Dropdown
-                        menu={{
-                            items,
-                        }}
-                    >
-                        <a onClick={(e) => e.preventDefault()}>
-                            <Space>
-                                Hover me
-                                <DownOutlined />
-                            </Space>
-                        </a>
-                    </Dropdown>
+
                 </Sider>
                 <Layout>
                     <Header style={headerStyle}>
