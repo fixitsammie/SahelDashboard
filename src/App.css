@@ -42,3 +42,12 @@ p {
     font-weight: 600;
     font-size: 18px;
 }
+
+.ant-menu-itemsa:hover {
+    background-color: #7957f2;
+    color: gold;
+}
+
+.ant-menu-item-selected {
+    font-weight: bolder;
+}

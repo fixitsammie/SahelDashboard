@@ -1,5 +1,5 @@
 import './App.css';
-import { Layout, Input, Menu, Badge, Avatar, Dropdown, Space, Button, Table, Tag, Tabs, Flex, Radio } from 'antd';
+import { Layout, Input, Menu, Badge, Avatar, Dropdown, Space, Button, Table, Tag, Tabs, Flex, Radio, ConfigProvider } from 'antd';
 import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined, BellOutlined, DownOutlined, MoreOutlined, EditOutlined, HomeOutlined, UserAddOutlined, SwapOutlined, ProjectOutlined, TagsOutlined, PayCircleOutlined, TableOutlined, TrophyOutlined, FileProtectOutlined, FileTextOutlined } from '@ant-design/icons';
 const { Search } = Input;
@@ -50,7 +50,8 @@ const siderStyle = {
 
     lineHeight: '120px',
     color: '#fff',
-    minHeight: '100vh'
+    minHeight: '100vh',
+    padding: 20,
 
 };
 const footerStyle = {
@@ -189,48 +190,72 @@ function App() {
             <Layout>
                 <Sider style={siderStyle} width='300'>
                     <h1 style={{ paddingLeft: 30 }}>Sahel</h1>
-                    <Menu
-                        mode="inline"
-                        openKeys={openKeys}
-                        onOpenChange={onOpenChange}
-                        style={{ width: 256, background: 'transparent', color: 'white', }}
-                        items={itemsA}
-                    />
+                    <ConfigProvider theme={{
+                        components: {
+                            Menu: {
+                                colorPrimary: '#00b96b',
+                                algorithm: true, // Enable algorithm
+                                darkItemHoverBg: 'white',
+                                itemHoverBg: 'rgba(121,87,242,0.7)',
+                                itemHoverColor: 'white',
+                                itemActiveBg: '#7957f2',
+                                itemSelectedBg: '#7957f2',
+                                itemSelectedColor: 'white',
+                            },
 
+                        },
+                    }}>
+                        <Menu
+                            mode="inline"
+                            openKeys={openKeys}
+                            onOpenChange={onOpenChange}
+                            style={{ width: 256, background: 'transparent', color: 'white', }}
+                            items={itemsA}
+                        />
+
+                    </ConfigProvider>
                 </Sider>
                 <Layout>
                     <Header style={headerStyle}>
-                        <Search
-                            placeholder="Search..."
-                            onSearch={onSearch}
-                            style={{
-                                width: 200,
-                            }}
-                        />
-                        <BellOutlined style={({ color: 'black', })} />
+                        <Flex justify='space-between' align='center'>
 
-                        <Badge
-                            dot={true}>
-                            <Avatar shape="square" size="large"
-                            >
-                                <BellOutlined style={({ color: 'black', })} />
-                            </Avatar>
-                        </Badge>
-                        <Avatar shape="round" size="large"></Avatar>
-
-                        <Space>
-                            <Dropdown
-                                menu={{
-                                    items,
+                            <Search
+                                placeholder="Search..."
+                                onSearch={onSearch}
+                                style={{
+                                    width: 200,
                                 }}
-                            >
-                                <a onClick={(e) => e.preventDefault()}>
-                                    <Space>
-                                        Hover me
-                                        <DownOutlined />
-                                    </Space>
-                                </a>
-                            </Dropdown></Space>
+                            />
+
+
+
+                            <Space>
+
+
+                                <Badge
+                                    dot={true}>
+                                    <Avatar shape="square" size="large"
+                                    >
+                                        <BellOutlined style={({ color: 'black', })} />
+                                    </Avatar>
+                                </Badge>
+                                <Avatar shape="round" size="large"></Avatar>
+
+                                <Space>
+                                    <Dropdown
+                                        menu={{
+                                            items,
+                                        }}
+                                    >
+                                        <a onClick={(e) => e.preventDefault()}>
+                                            <Space>
+                                                Name
+                                                <DownOutlined />
+                                            </Space>
+                                        </a>
+                                    </Dropdown></Space>
+                            </Space>
+                        </Flex>
 
 
 
