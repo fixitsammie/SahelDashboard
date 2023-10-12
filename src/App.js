@@ -278,10 +278,27 @@ function App() {
                                 }}
                             >
 
-                                <Radio.Group value={tabPosition} onChange={changeTabPosition}>
-                                    <Radio.Button value="left">Internal invoices</Radio.Button>
-                                    <Radio.Button value="right">External invoices</Radio.Button>
-                                </Radio.Group>
+                                <ConfigProvider theme={{
+                                    components: {
+                                        Radio: {
+                                            buttonSolidCheckedActiveBg: '#7957f2',
+                                            buttonSolidCheckedHoverBg: '#7957f2',
+                                            buttonSolidCheckedBg: '#7957f2',
+                                            buttonColor: '#7957f2',
+                                            colorText: '#7957f2',
+                                            colorTextLightSolid: 'white',
+                                            colorPrimaryHover: 'rgba(121,87,242,0.7)',
+
+
+
+                                        }
+                                    }
+                                }}>
+                                    <Radio.Group value={tabPosition} onChange={changeTabPosition} buttonStyle="solid">
+                                        <Radio.Button value="left">Internal invoices</Radio.Button>
+                                        <Radio.Button value="right">External invoices</Radio.Button>
+                                    </Radio.Group>
+                                </ConfigProvider>
                             </Space>
                         </div>
                         <Flex justify='space-between' align='flex-start'>

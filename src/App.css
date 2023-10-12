@@ -51,3 +51,32 @@ p {
 .ant-menu-item-selected {
     font-weight: bolder;
 }
+
+.ant-radio-group-solid {
+    border: 1px solid #7957f2;
+
+    border-radius: 8px;
+    padding: 2px;
+}
+
+.ant-radio-button-wrapper {
+    border-radius: 6px;
+    border: transparent;
+}
+
+.ant-radio-button-wrapper::before,
+.ant-radio-button-wrapper:not(:first-child)::before {
+    background-color: transparent;
+}
+
+.ant-radio-button-wrapper:hover {
+    color: #7957f2;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):active::before {
+    background-color: transparent;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before {
+    background-color: transparent;
+}
